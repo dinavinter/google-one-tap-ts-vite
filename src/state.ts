@@ -1,9 +1,13 @@
-import { createMachine, interpret } from '@xstate/fsm';
+import { createMachine, interpret, assign } from '@xstate/fsm';
 import type { StateFrom } from '@xstate/fsm';
-class Jwt {
-  JSON: object;
+
+export type GoogleCredntialResponse = {
+  credential: string;
+};
+export class Jwt {
+  Json: Record<string, object>;
   constructor(public token: string) {
-    this.JSON = Jwt.parseJwt(token);
+    this.Json = Jwt.parseJwt(token);
   }
 
   static parseJwt = (token: string) => {
@@ -19,21 +23,33 @@ class Jwt {
 
     return JSON.parse(
       b64DecodeUnicode(token.split('.')[1].replace('-', '+').replace('_', '/'))
-    );
+    ) as Record<string, object>;
   };
 }
 
-const authMachine = createMachine({
-  id: 'auth',
-  context: {
-    google_identity: undefined as typeof Jwt | undefined,
+const authMachine = createMachine(
+  {
+    id: 'auth',
+    context: {
+      id_token: undefined as typeof Jwt | undefined,
+    },
+    initial: 'none',
+    states: {
+      none: {
+        on: { GOOLE_CB: { target: 'authenticated', actions: ['setIdToken'] } },
+      },
+      authenticated: {},
+    },
   },
-  initial: 'none',
-  states: {
-    none: { on: { GOOLE_CB: 'authenticated' } },
-    authenticated: {},
-  },
-});
+  {
+    actions: {
+      setIdToken: assign({
+        id_token: (_ctx: unknown, event: GoogleCredntialResponse) =>
+          new Jwt(event.credential),
+      }),
+    },
+  }
+);
 
 export const authService = interpret(authMachine).start();
 export type AuthState = StateFrom<typeof authMachine>;

@@ -17,11 +17,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </a>
     <h1> Google One Tap</h1>
      
-    <div class="centered padding-top">
-  
-        <div id="no-auth" class="container"></div>
-        <div id="authenticated" style="display:none"> </div>
-        <div id="properties"></div>
+    <div class="centered padding-top vcontainer container">
+        <section class="card container" id="no-auth" ></section>
+        <section class="card container" id="authenticated"> </section>
+        <section class="container" id="properties"></section>
 
     </div>
   </div>
