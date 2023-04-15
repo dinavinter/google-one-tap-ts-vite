@@ -1,7 +1,7 @@
-import { authService } from '@google/service';
+import { googleService } from '@google/service';
 
 export function setupLoginContainer(element: HTMLDivElement) {
-  authService.subscribe((event: { value: string }) => {
+  googleService.subscribe((event: { value: string }) => {
     console.log(event);
     element.style.display = event.value == 'authenticated' ? 'none' : 'inline';
   });
