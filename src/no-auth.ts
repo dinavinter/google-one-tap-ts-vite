@@ -1,4 +1,4 @@
-import { setupGoogleButton, setupGoogleLogin } from './google-onetap';
+import { setupGoogleButton } from './google-onetap';
 
 export function setupNoAuth(element: HTMLDivElement) {
   element.innerHTML = `<h3>This is a basic example on how to enable Google One Tap Authentication in a web page</h3>

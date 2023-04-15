@@ -1,4 +1,15 @@
+import { authService } from './state';
+
 export function setupAuthenticated(element: HTMLDivElement) {
+  authService.subscribe(({ value }: { value: string }) => {
+    if (value == 'authenticated') {
+      setDisplay();
+    }
+  });
+
+  const setDisplay = () => {
+    element.style.display = 'inline';
+  };
   element.innerHTML = ` <h3>Looks like you have already authenticated yourself!</h3>
   <p><b>Here is the info I recovered about your profile in your Google account:</b></p>
   <table id="token-table">

@@ -95,3 +95,13 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.padding-top {
+  padding-top: 10rem;
+}
