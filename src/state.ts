@@ -4,10 +4,16 @@ import type { StateFrom } from '@xstate/fsm';
 export type GoogleCredntialResponse = {
   credential: string;
 };
+
+export type GoogleClaims = Record<string, object> & {
+  name: string;
+  picture: string;
+};
+export type GoogleJwt = Jwt & { claims: GoogleClaims };
 export class Jwt {
-  Json: Record<string, object>;
-  constructor(public token: string) {
-    this.Json = Jwt.parseJwt(token);
+  claims: Record<string, object>;
+  constructor(public raw: string) {
+    this.claims = Jwt.parseJwt(raw);
   }
 
   static parseJwt = (token: string) => {
@@ -31,7 +37,7 @@ const authMachine = createMachine(
   {
     id: 'auth',
     context: {
-      id_token: undefined as typeof Jwt | undefined,
+      id_token: undefined as unknown as GoogleJwt,
     },
     initial: 'none',
     states: {

@@ -17,9 +17,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </a>
     <h1> Google One Tap</h1>
      
-    <div class="centered padding-top vcontainer container">
+    <div class="vcontainer container">
         <section class="card container" id="no-auth" ></section>
-        <section class="card container" id="authenticated"> </section>
+        <section class="section container" id="authenticated"> </section>
         <section class="container" id="properties"></section>
 
     </div>
