@@ -21,15 +21,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     
     <div class="centered padding-top">
   
-    <div id="no-auth" class="container">
-    </div>
-        <div id="authenticated" style="display:none">
-         
-        </div>
-
-       <div id="properties">
-      
-        </div>
+        <div id="no-auth" class="container"></div>
+        <div id="authenticated" style="display:none"> </div>
+        <div id="properties"></div>
 
     </div>
   </div>
@@ -40,4 +34,3 @@ setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
 setupNoAuth(document.querySelector<HTMLDivElement>('#no-auth')!);
 setupAuthenticated(document.querySelector<HTMLDivElement>('#authenticated')!);
 setupProperties(document.querySelector<HTMLDivElement>('#properties')!);
-
