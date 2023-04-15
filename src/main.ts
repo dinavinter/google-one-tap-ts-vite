@@ -1,10 +1,12 @@
 import './style.css';
 import typescriptLogo from './typescript.svg';
 import viteLogo from '/vite.svg';
-import { setupNoAuth } from './no-auth';
-import { setupAuthenticated } from './authenticated';
-import { setupProperties } from './properties';
-import { setupGoogleLogin } from './google-onetap';
+import {
+  setupProfileContainer,
+  setupGoogleLogin,
+  setupLoginContainer,
+  setupProperties,
+} from '@google';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -18,16 +20,23 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <h1> Google One Tap</h1>
      
     <div class="vcontainer container">
-        <section class="card container" id="no-auth" ></section>
-        <section class="section container" id="authenticated"> </section>
+    <section class="section container" id="not-authenticated"> </section>
+    <section class="section container" id="authenticated"> </section>
+        <section class="section container" id="google-container"> </section>
         <section class="container" id="properties"></section>
 
     </div>
   </div>
   </div>
 `;
-
-setupNoAuth(document.querySelector<HTMLDivElement>('#no-auth')!);
-setupAuthenticated(document.querySelector<HTMLDivElement>('#authenticated')!);
-setupProperties(document.querySelector<HTMLDivElement>('#properties')!);
 setupGoogleLogin(document.querySelector<HTMLDivElement>('#google-setup')!);
+
+setupLoginContainer(
+  document.querySelector<HTMLDivElement>('#not-authenticated')!
+);
+
+setupProfileContainer(
+  document.querySelector<HTMLDivElement>('#authenticated')!
+);
+
+setupProperties(document.querySelector<HTMLDivElement>('#properties')!);

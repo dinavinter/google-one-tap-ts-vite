@@ -1,10 +1,16 @@
-import { authService } from './state';
+import { googleService } from '@google/service';
+
+export type GoogleCredntialResponse = {
+  credential: string;
+};
 
 export function setupGoogleLogin(element: HTMLDivElement) {
   // let element = document.createElement('div');
   // element.setAttribute('id', 'google-setup');
-  (window as any).onGoogleSignIn = ({ credential }: { credential: string }) => {
-    authService.send({ type: 'GOOLE_CB', credential: credential });
+  (window as any).onGoogleSignIn = ({
+    credential,
+  }: GoogleCredntialResponse) => {
+    googleService.send({ type: 'ID_TOKEN', id_token: credential });
   };
 
   var script = document.createElement('script');
@@ -27,11 +33,4 @@ export function setupGoogleLogin(element: HTMLDivElement) {
   
   `;
   // document.querySelector<HTMLDivElement>('#app')!.appendChild(element);
-}
-
-export function setupGoogleButton(element: HTMLDivElement) {
-  element.innerHTML = ` 
-  <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left">
-  </div>
-  `;
 }

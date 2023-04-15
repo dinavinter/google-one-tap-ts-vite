@@ -1,7 +1,6 @@
-import { setupGoogleButton } from './google-onetap';
-import { authService } from './state';
+import { authService } from '@google/service';
 
-export function setupNoAuth(element: HTMLDivElement) {
+export function setupLoginContainer(element: HTMLDivElement) {
   authService.subscribe((event: { value: string }) => {
     console.log(event);
     element.style.display = event.value == 'authenticated' ? 'none' : 'inline';
@@ -12,7 +11,13 @@ export function setupNoAuth(element: HTMLDivElement) {
   <p>To proceed with testing the authentication flow, <b>follow the prompt shown in the top right corner of the page ☝️.</b> <br/> Or, use the google button 👇 </p>
  
   <div id="link-login" class="centered">
+  ${googleButton()}
   </div>`;
+}
 
-  setupGoogleButton(document.querySelector<HTMLDivElement>('#link-login')!);
+function googleButton() {
+  return ` 
+  <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="continue_with" data-size="large" data-logo_alignment="left">
+  </div>
+  `;
 }

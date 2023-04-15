@@ -14,10 +14,20 @@
     "noEmit": true,
 
     /* Linting */
+
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Path */
+
+    "paths": {
+      "@auth/*": ["./src/auth/*"],
+      "@auth": ["./src/auth/index"],
+      "@google/*": ["./src/google/*"],
+      "@google": ["./src/google/index"]
+    }
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

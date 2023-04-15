@@ -1,6 +1,6 @@
-import type { GoogleJwt, Jwt } from './state';
+import type { OidcJwt, Jwt } from '@auth/jwt';
 
-export function dumpJwt({ id_token }: { id_token: GoogleJwt }) {
+export function dumpJwt({ id_token }: { id_token: OidcJwt }) {
   return (
     (id_token &&
       ` <div class="vcontainer" >
@@ -12,7 +12,7 @@ export function dumpJwt({ id_token }: { id_token: GoogleJwt }) {
   );
 }
 
-function welcome({ claims: { name, picture } }: GoogleJwt) {
+function welcome({ claims: { name, picture } }: OidcJwt) {
   return `
   <div >
   <h1 class="float-left">Hello <b>${name}!</b>
